@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons >
+      <ion-back-button slot="start"></ion-back-button>
+      <ion-title style="text-align: center;"> UniJobs</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding-vertical">
+    <!--
+      Se establece un card que contendra un titulo
+      y un contenido
+    -->
+    <ion-card class="ion-text-center">
+      <ion-card-title class="ion-text-center">
+        <ion-label>
+          <h1>Datos Nuevo Empleo</h1>
+        </ion-label>
+      </ion-card-title>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Titulo</ion-label>
+          <ion-input type="text" [(ngModel)]="empleo.titulo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">texto</ion-label>
+          <ion-textarea type="text" [(ngModel)]="empleo.texto"></ion-textarea>
+        </ion-item>
+        <!--<ion-item>
+          <ion-label position="floating">Nombre Usuario</ion-label>
+          <ion-textarea type="text" [(ngModel)]="empleo.Nombre_usu"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Descripción del empleo</ion-label>
+          <ion-textarea type="text" [(ngModel)]="empleo.Descrip_emp"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Ganancia</ion-label>
+          <ion-input type="number" placeholder="" [(ngModel)]="empleo.Sueldo_emp">$ {{sueldo | currency:'CLP':'symbol-narrow':'.0-0'}}</ion-input>
+        </ion-item>
+        -->
+      </ion-card-content>
+      <ion-button shape="block" (click)="agregaremp()">Publicar empleo</ion-button>
+    </ion-card>
+  </div>
+
+</ion-content>

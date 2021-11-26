@@ -1,0 +1,7 @@
+{
+  "name": "UniJobs",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

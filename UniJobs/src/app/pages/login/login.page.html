@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons >
+      <ion-back-button slot="start"></ion-back-button>
+      <ion-title style="padding-left: 23%;"> UniJobs</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="1">
+      </ion-col>
+      <ion-col>
+        <h4 style="text-align: center;">¡Comienza tu busqueda!</h4>
+        <br/>
+          <h2 style="text-align:center;">Iniciar Sesión</h2>
+        <ion-item>
+              <ion-label position="floating">Usuario</ion-label>
+              <ion-input type="text" [(ngModel)]="iniciarsesion.nombre_usu" placeholder="Usuario"></ion-input>
+        </ion-item>
+        <br />
+        <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input type="password"  [(ngModel)]="iniciarsesion.clave" placeholder="Contraseña"></ion-input>
+        </ion-item>
+        <br/>
+        <ion-button expand="block" color="dark" (click)="ingresar()">Ingresar</ion-button>
+        <br/>
+        
+        
+        <ion-button ion-left expand="block" color="light" type="outline">
+          <ion-icon name="logo-google"></ion-icon>
+          Iniciar con Google</ion-button>
+        
+        <ion-button ion-left expand="block" color="primary">
+        <ion-icon  name="logo-facebook"></ion-icon>
+        Iniciar con Facebook</ion-button>
+        <a style="padding-left: 13%;"  [routerLink]="['/registrarse']">¿Aún no tienes una cuenta? </a>
+    
+  
+       
+      </ion-col>
+      <ion-col size="1">  
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
