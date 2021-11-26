@@ -19,23 +19,26 @@ export class HomePage  implements OnInit{
 
   empleo: any =[
     {
-      id_emp : '',
+      id_emp: '',
       titulo_emp: '',
       descrip_emp: '',
       pago_emp: '',
-      status_emp: ''
+      status_emp: '',
+      nombre_usu:'',
+      run_usu: ''
     }
   ]
 
   constructor(private router:Router, public servicioBD:DbService) {
-    /*this.router.navigate(['home/empleos'])*/
+
   }
+
   ngOnInit(){
-    //this.servicioBD.presentAlert("1");
+   // this.servicioBD.presentAlert("1");
     this.servicioBD.dbState().subscribe((res) =>{
-      //this.servicioBD.presentAlert("2");
+     // this.servicioBD.presentAlert("2");
       if(res){
-        //this.servicioBD.presentAlert("3");
+       // this.servicioBD.presentAlert("3");
         this.servicioBD.fetchEmpleos().subscribe(item =>{
           this.empleo = item;
         })
@@ -67,7 +70,9 @@ export class HomePage  implements OnInit{
                cadenaTexto2: item.titulo_emp, 
                cadenaTexto3: item.descrip_emp,
                cadenaTexto4: item.pago_emp,
-               cadenaTexto5: item.status_emp
+               cadenaTexto5: item.status_emp,
+               cadenaTexto6: item.nombre_usu,
+               cadenaTexto7: item.run_usu
             }
     }
     this.router.navigate(['/modificar'], navigationExtras);
