@@ -49,7 +49,7 @@ export class DbService {
 
       }).then((db: SQLiteObject) => {
         this.database = db;
-        this.presentAlert("BD Creada"); 
+        //this.presentAlert("BD Creada"); 
         //llamamos a la creación de tablas
         this.crearTablas();
       }).catch(e => this.presentAlert(e));
@@ -63,17 +63,14 @@ export class DbService {
       //await this.database.executeSql(this.dropemp, []);
       await this.database.executeSql(this.TablaEmpleos, []);
       await this.database.executeSql(this.registro_emp, []);
-      
-      
-      this.presentAlert("Creo la Tabla empleos");
+
       //ejecutamos la creacion de tabla Usuario
       await this.database.executeSql(this.TablaUsuarios, []);
       await this.database.executeSql(this.registro_usu, []);
          /*await this.database.executeSql(this.update_emp, []);*/
-      this.presentAlert("Creo la Tabla Usuario");
+
       this.buscarEmpleos();
       this.buscarUsuarios();
-      this.presentAlert("Ha ocurrido un error inesperado al crear la tabla:  " + this.TablaEmpleos);
       this.isDbReady.next(true);
     } catch (error) {
       this.presentAlert("Ha ocurrido un error inesperado al crear la tabla:  " + error.message);
@@ -81,7 +78,7 @@ export class DbService {
   }
 
   buscarEmpleos() {
-    return this.database.executeSql('SELECT * FROM empleo', []).then(res => {
+    return this.database.executeSql('SELECT * FROM empleo ', []).then(res => {
       let items: Empleos[] = [];
       //this.presentAlert("b");
       if (res.rows.length > 0) {
@@ -101,8 +98,8 @@ export class DbService {
       }
       
       this.listaEmpleos.next(items);
-      this.presentAlert("e");
-    }).catch(e => this.presentAlert(e));
+      //this.presentAlert("e");
+    })
   }
 
 
@@ -120,17 +117,17 @@ export class DbService {
       })
   }
 
-  updateEmpleo(id_emp, titulo_emp, descrip_emp, pago_emp, status_emp) {
-    //this.presentAlert(titulo);
-    let data = [titulo_emp, descrip_emp, pago_emp, status_emp, id_emp];
-    //this.presentAlert(id+"");
-    return this.database.executeSql('UPDATE empleo SET titulo_emp = ?, descrip_emp = ? , pago_emp= ?, status_emp= ?,  WHERE id = ?', data)
+  updateEmpleo(id_emp, titulo_emp, descrip_emp, pago_emp, status_emp,nombre_usu,run_usu) {
+    //this.presentAlert(titulo_emp);
+    let data = [titulo_emp, descrip_emp, pago_emp, status_emp,nombre_usu,run_usu, id_emp];
+    //this.presentAlert(id_emp+"");
+    return this.database.executeSql('UPDATE empleo SET titulo_emp = ?, descrip_emp = ? , pago_emp= ?, status_emp= ?, nombre_usu=?,run_usu=? WHERE id_emp = ?', data)
       .then(data => {
         //this.presentAlert("b");
         this.buscarEmpleos();
-       // this.presentAlert("c");
+        //this.presentAlert("c");
 
-      }) /*c*/
+      }).catch(error => this.presentAlert(error.message));
       
   }
 
