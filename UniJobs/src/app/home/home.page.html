@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title style="text-align: center; font-weight: bold;">UniJobs</ion-title>
+    <ion-title style="text-align: center; font-weight: bold;"> UniJobs</ion-title>
   </ion-toolbar>
   <!--Cabecera tipo menu-->
   
@@ -34,12 +34,12 @@
       <ion-list *ngIf="ocultar1">
           <mat-card class="example-card" *ngFor="let item of empleo" [routerLink]="['/home']">
             <mat-card-title-group>
-              <mat-card-title>{{item.titulo}}</mat-card-title>
-              <mat-card-subtitle>{{item.id}}</mat-card-subtitle>
+              <mat-card-title>{{item.run_usu}}</mat-card-title>
+              <mat-card-subtitle>{{item.id_emp}}</mat-card-subtitle>
               <img [src]="item.imageURL" >
             </mat-card-title-group>
             <mat-card-content>
-              {{item.texto}}
+              {{item.descrip_emp}}
             </mat-card-content>
             <mat-card-actions>
               <button mat-icon-button color="primary" >
@@ -76,15 +76,12 @@
       <h4 class="h4lit">Empleos publicados...</h4>
       <ion-list >
         <ion-item-sliding *ngFor="let item of empleo">
-      
           <ion-item>
-      
-      
             <ion-label>
-              <p style="color:grey;font-size: small; text-align: left;margin-left: 20px;" class="plit">{{item.id}}</p>
-              <h2 class="h2lit">{{item.titulo}}</h2>
+              <p style="color:grey;font-size: small; text-align: left;margin-left: 20px;" class="plit">{{item.id_emp}}</p>
+              <h2 class="h2lit">{{item.titulo_emp}}</h2>
               <!-- word-wrap para los cortes entre palabras  white-space para que aparezca todo el texto en varias lineas y no se corte-->
-              <p class="plit" style="word-wrap: break-word; white-space: normal;">{{item.texto}}</p>
+              <p class="plit" style="word-wrap: break-word; white-space: normal;">{{item.descrip_emp}}</p>
             </ion-label>
        
           </ion-item>
