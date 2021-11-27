@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title style="text-align: center; font-weight: bold;"> UniJobs</ion-title>
+    <ion-title style="text-align: center; font-weight: bold;" > UniJobs</ion-title>
   </ion-toolbar>
   <!--Cabecera tipo menu-->
   
@@ -35,7 +35,7 @@
           <mat-card class="example-card" *ngFor="let item of empleo" [routerLink]="['/home']">
             <mat-card-title-group>
               <mat-card-title>{{item.titulo_emp}}</mat-card-title>
-              <mat-card-subtitle>{{item.id_emp}}</mat-card-subtitle>
+              <mat-card-subtitle>{{item.nombre_usu}}</mat-card-subtitle>
               <img [src]="item.imageURL" >
             </mat-card-title-group>
             <mat-card-content>

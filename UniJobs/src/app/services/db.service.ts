@@ -3,6 +3,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 import { AlertController, Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Empleos } from './empleos';
+import { Postulacion } from './postulacion';
 import { Usuarios } from './Usuarios';
 
 
@@ -15,15 +16,20 @@ export class DbService {
 
   //tabla usuario//
   TablaUsuarios: string = "CREATE TABLE IF NOT EXISTS usuario(run_usu INTEGER PRIMARY KEY, numero_usu INTEGER NOT NULL, nombre VARCHAR(50) NOT NULL, apellido VARCHAR(50) NOT NULL, fec_nac DATE NOT NULL, correo VARCHAR(50) NOT NULL, nombre_usu VARCHAR(50)NOT NULL, clave VARCHAR(50)NOT NULL);";
-  registro_usu: string = "INSERT or IGNORE INTO usuario(run_usu, numero_usu, nombre, apellido, fec_nac, correo, nombre_usu, clave) VALUES (123456789, 12345678,'Nicolas', 'sanchez', 09/10/1998, 'nnm@jkl.com', 'nico', '123qwe');";
+  registro_usu: string = "INSERT or IGNORE INTO usuario(run_usu, numero_usu, nombre, apellido, fec_nac, correo, nombre_usu, clave) VALUES (204679525, 12345678,'Nicolas', 'sanchez', 09/10/1998, 'nnm@jkl.com', 'nico', '123qwe');";
   /*tabla empleos */
   dropemp:string = "DROP TABLE empleo;"
   TablaEmpleos: string = "CREATE TABLE IF NOT EXISTS empleo(id_emp INTEGER PRIMARY KEY AUTOINCREMENT, titulo_emp VARCHAR(50) NOT NULL, descrip_emp VARCHAR(50) NOT NULL, pago_emp NUMBER(4) NOT NULL, status_emp VARCHAR(50)NOT NULL, nombre_usu VARCHAR(50) NOT NULL,run_usu INTEGER NOT NULL,FOREIGN KEY (run_usu) REFERENCES usuario (run_usu));";
   registro_emp: string = "INSERT or IGNORE INTO empleo(id_emp, titulo_emp, descrip_emp, pago_emp, status_emp,nombre_usu,run_usu) VALUES (1,'Paseo perruno','Necesito que alguien realice el paseo perruno', 2000, 'ayer','nico',204679525);";
   /*update_emp :string = "UPDATE empleo SET titulo = 'zapato', texto = '123124214'  WHERE id = 1";*/  
+  TablaPostulacion: string = "CREATE TABLE IF NOT EXISTS postulacion(id_post INTEGER PRIMARY KEY AUTOINCREMENT,id_emp INTEGER NOT NULL, run_usu INTEGER NOT NULL,FOREIGN KEY (run_usu) REFERENCES usuario (run_usu), FOREIGN KEY (id_emp) REFERENCES empleo(id_emp));";
+  registro_post: string = "INSERT or IGNORE INTO empleo(id_post, id_emp,run_usu,fecha_post) VALUES (1,1,204679525);";
+  /*update_emp :string = "UPDATE empleo SET titulo = 'zapato', texto = '123124214'  WHERE id = 1";*/  
+
 
   listaEmpleos = new BehaviorSubject([]);
   listaUsuarios = new BehaviorSubject([]);
+  listaPostulacion= new BehaviorSubject([]);
 
   private isDbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -68,9 +74,12 @@ export class DbService {
       await this.database.executeSql(this.TablaUsuarios, []);
       await this.database.executeSql(this.registro_usu, []);
          /*await this.database.executeSql(this.update_emp, []);*/
+      await this.database.executeSql(this.TablaPostulacion, []);
+      await this.database.executeSql(this.registro_post, []);
 
       this.buscarEmpleos();
       this.buscarUsuarios();
+      this.buscarPostulacion();
       this.isDbReady.next(true);
     } catch (error) {
       this.presentAlert("Ha ocurrido un error inesperado al crear la tabla:  " + error.message);
@@ -222,7 +231,52 @@ deleteUsuario(run_usu) {
     });
 }
 
-  
+// Funciones postulacion
+
+buscarPostulacion() {
+  return this.database.executeSql('SELECT * FROM postulacion WHERE run_usu=204679525', []).then(res => {
+    let items: Postulacion[] = [];
+    //this.presentAlert("b");
+    if (res.rows.length > 0) {
+     //this.presentAlert("c");
+      for (var i = 0; i < res.rows.length; i++) { 
+      // this.presentAlert("d");
+        items.push({ 
+          id_post: res.rows.item(i).id_post,
+          id_emp: res.rows.item(i).id_emp,
+          run_usu:res.rows.item(i).run_usu
+         });
+      }
+    }
+    
+    this.listaPostulacion.next(items);
+    //this.presentAlert("e");
+  })
+}
+
+
+/**TOMA TODO EL OBSERVABLE Y GENERA COMO UNA COLECION EN JAVA Y LO RETORNA */
+fetchPostulacion(): Observable<Postulacion[]> {
+  return this.listaPostulacion.asObservable();
+}
+
+//funciones
+addPostulacion(id_emp, run_usu) {
+  let data = [id_emp, run_usu];
+  return this.database.executeSql('INSERT INTO empleo (id_emp, run_usu) VALUES (?, ?)', data)
+    .then(_res => {
+      this.buscarPostulacion();
+    })
+}
+
+
+
+deletePostulacion(id_post) {
+  return this.database.executeSql('DELETE FROM postulacion WHERE id_post= ?',[id_post])
+    .then(_ => {
+      this.buscarPostulacion();
+    });
+}
  
  
   async presentAlert(mensaje: string) {
