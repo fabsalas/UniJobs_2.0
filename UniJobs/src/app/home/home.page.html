@@ -26,11 +26,16 @@
           <mat-slide-toggle class="toggle" color="primary" (click)="accion1()"style="border-color: grey;"><ion-icon style="height: 140px;width: 25px;" name="location-outline" ></ion-icon></mat-slide-toggle>
               Ubicacion</ion-button>
       </ion-buttons>
-
+      <mat-card class="cardmap" *ngIf="ocultar1">
+        <mat-card-content class="mapa">
+          <div #map  >MAPA</div> 
+        </mat-card-content>
+      </mat-card>
     <br>
-
+  
     <div>
       <!--Cards de los empleos-->
+     
       <ion-list *ngIf="ocultar1">
           <mat-card class="example-card" *ngFor="let item of empleo" [routerLink]="['/home']">
             <mat-card-title-group>

@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef, } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { DbService } from '../services/db.service';
+
+//import de api geolocation
+ import{ Geolocation } from '@ionic-native/geolocation/ngx';
+
+//google maps
+
+
+
+declare var google:any ;
 
 @Component({
   selector: 'app-home',
@@ -31,9 +40,25 @@ export class HomePage  implements OnInit{
     }
   ]
 
-  constructor(private router:Router, public servicioBD:DbService) {
+  mapa: any ;
+  
+  @ViewChild('mapa', {read: ElementRef, static: false}) mapRef: ElementRef;
 
-  }
+  infoWindows : any [];
+  marcadores: any = [{
+    empleo: 'Manicure',
+    direccion: 'av. las bellas',
+    distancia: '1 km'
+
+  },
+  {
+    empleo: 'Paseo perro',
+    direccion: ' calle rojo',
+    distancia: '2km'
+  }]
+  
+
+  constructor(private router:Router, public servicioBD:DbService, private geolocation: Geolocation) {}
 
   ngOnInit(){
    // this.servicioBD.presentAlert("1");
@@ -42,12 +67,16 @@ export class HomePage  implements OnInit{
       if(res){
        // this.servicioBD.presentAlert("3");
         this.servicioBD.fetchEmpleos().subscribe(item =>{
-          this.empleo = item;
+          this.empleo = item; 
         })
       }
       //this.servicioBD.presentAlert("4");
     });
   }
+
+  
+
+  
 
   
 /**Funcion del segment para manipular la informacion en el home */
@@ -80,4 +109,86 @@ export class HomePage  implements OnInit{
     this.router.navigate(['/modificar'], navigationExtras);
   }
 
+
+ 
+  //funcion de api geolocalizacion
+  mostrarGeo(){
+ this.geolocation.getCurrentPosition().then((resp) => {
+  resp.coords.latitude
+  resp.coords.longitude
+ }).catch((error) => {
+   console.log('Error getting location', error);
+ });
+
+ let watch = this.geolocation.watchPosition();
+ watch.subscribe((data) => {
+  // data can be a set of coordinates, or an error (if an error occurred).
+  //data.coords.latitude
+  //data.coords.longitude
+ });
+  }
+
+
+  
+ //API google maps
+
+  agregarMarcadoresMapa(marcadores){
+    for(let marcador of marcadores){
+      let position = new google.maps.LatLng(marcador.latitude, marcador.longitude);
+      let mapMarker = new google.maps.marcadores({
+        position: position,
+        empleo: marcadores.empleo,
+        direccion:marcadores.direccion,
+        distancia: marcadores.distancia
+      });
+
+      mapMarker.setMapa(this.mapa);
+      this.agregarInfoVentanaMarcador(mapMarker);
+      }
+    }
+    agregarInfoVentanaMarcador(marcador){
+      let infoWindowsContent = '<div id= "content">'+
+                                  '<h2 id= "firstHeading" class"firstHeading">'+ marcador.empleo+'</h2>'
+                                  '<p> direccion: '+marcador.direccion+ '</p>'
+                                  '<p> direccion: '+marcador.distancia+ '</p>'
+                                '</div>';
+
+      let infoWindow = new google.maps.infoWindows({
+        content: infoWindowsContent
+      });
+      marcador.addlistener('click', ()=> {
+        this.cerrarInfoVentanaMarcador();
+        infoWindow.open(this.mapa, marcador);
+      });
+      this.infoWindows.push(infoWindow);
+    }
+
+    cerrarInfoVentanaMarcador(){
+      for (let window of this.infoWindows){
+        window.close();
+      }
+    }
+  
+
+  ionViewDidEnter(){
+    this.mostrarMapa();
+  }
+  /*ngAfterContentInit() {
+    this.mostrarMapa();
+}*/
+
+//funcion para mostrar el mapa
+ mostrarMapa(){
+   const locacion = new google.maps.LatLng(-17.824858, 31.053028);
+    const opciones ={
+      center: locacion,
+      zoom:  15,
+      disableDefautlUI: true
+    }
+    this.mapa = new google.maps.Mapa(this.mapRef.nativeElement, opciones);
+    this.agregarMarcadoresMapa(this.marcadores);
+   }
+
+
 }
+
