@@ -16,7 +16,9 @@ export class HomePage  implements OnInit{
   this.ocultar2 = !this.ocultar2;
   }
   /*empleo: any [] = []*/
-
+  sesion: any = {
+    nombre_usu : ''
+  };
   empleo: any =[
     {
       id_emp: '',

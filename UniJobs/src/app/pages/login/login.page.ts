@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
     
   }*/
 
-  async ingresar(){
+  async ingresar(item){
     if(this.validateModel(this.ingresar)){
       await this.servicioBD.ingresar(this.iniciarsesion.nombre_usu, this.iniciarsesion.clave);
      //this.servicioBD.presentAlert(this.servicioBD.existe+"");
