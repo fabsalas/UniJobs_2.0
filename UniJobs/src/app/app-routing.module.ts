@@ -32,6 +32,10 @@ const routes: Routes = [
     loadChildren: () => import('./pages/modificar/modificar.module').then( m => m.ModificarPageModule)
   },
   {
+    path: 'postular',
+    loadChildren: () => import('./pages/postular/postular.module').then( m => m.PostularPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./pages/notfound/notfound.module').then( m => m.NotfoundPageModule)
   },

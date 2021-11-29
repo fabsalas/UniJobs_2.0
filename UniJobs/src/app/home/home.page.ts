@@ -4,6 +4,7 @@ import { DbService } from '../services/db.service';
 
 //import de api geolocation
  import{ Geolocation } from '@ionic-native/geolocation/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 //google maps
 
@@ -58,7 +59,7 @@ export class HomePage  implements OnInit{
   }]
   
 
-  constructor(private router:Router, public servicioBD:DbService, private geolocation: Geolocation) {}
+  constructor(private router:Router, public servicioBD:DbService, private geolocation: Geolocation, private androidPermissions: AndroidPermissions) {}
 
   ngOnInit(){
    // this.servicioBD.presentAlert("1");
@@ -76,7 +77,14 @@ export class HomePage  implements OnInit{
 
   
 
-  
+  /*permisos(){
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.SMS).then(
+      result => console.log('Has permission?',result.hasPermission),
+      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SMS)
+    );
+    
+    this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.SMS, this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
+    }*/
 
   
 /**Funcion del segment para manipular la informacion en el home */
@@ -108,6 +116,22 @@ export class HomePage  implements OnInit{
     }
     this.router.navigate(['/modificar'], navigationExtras);
   }
+
+  //postular a empleo
+  /*postular(item) {
+    console.log(item);
+    let navigationExtras: NavigationExtras = {
+      state: { cadenaTexto: item.id_emp ,
+               cadenaTexto2: item.titulo_emp, 
+               cadenaTexto3: item.descrip_emp,
+               cadenaTexto4: item.pago_emp,
+               cadenaTexto5: item.status_emp,
+               cadenaTexto6: item.nombre_usu,
+               cadenaTexto7: item.run_usu
+            }
+    }
+    this.router.navigate(['/postular'], navigationExtras);
+  }*/
 
 
  
