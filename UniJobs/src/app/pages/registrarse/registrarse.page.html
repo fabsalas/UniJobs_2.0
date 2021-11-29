@@ -10,56 +10,43 @@
       <ng-template matStepLabel style="word-wrap: break-word;">Datos personales</ng-template>
       <mat-form-field appearance="legacy">
         <ion-item>
+          <ion-label position="floating">Número telefónico</ion-label>
+          <ion-input placeholder=" 9 12345678" formControlName="firstCtrl"
+                 required>+56 </ion-input>
+          </ion-item>
+      </mat-form-field>
+      <br>
+      <div >
+        <p>Se le enviará un código de verificación</p>
+        <br>
+        <div >
+        <center><ion-button color="light"  (click)="Mostrar()">ENVIAR SMS</ion-button></center>
+      </div>
+      <div >
+        <center><button mat-button matStepperNext style="color: white;padding: 15px 32px;background-color: #2a62cc;display: inline-block;margin:auto;font-size: 16px;" >Continuar</button></center>
+      </div>
+    </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel style="word-wrap: break-word;">Datos personales</ng-template>
+      <mat-form-field appearance="legacy">
+        <ion-item>
           <ion-label position="floating">R.U.T</ion-label>
-          <ion-input placeholder="123456789" formControlName="firstCtrl"
+          <ion-input placeholder="123456789" formControlName="secondCtrl"
                  required></ion-input>
           </ion-item>
         <br><br>
           <ion-item>
             <ion-label position="floating">Nombre completo</ion-label>
-            <ion-input  formControlName="firstCtrl"
-                   required></ion-input>
-          </ion-item>
-        <br><br>
-        <ion-item>
-          <ion-label position="floating">Fecha de nacimiento</ion-label>
-          <ion-input type="date" placeholder="01/01/1990" formControlName="firstCtrl"
-                 required></ion-input>
-        </ion-item>
-      </mat-form-field>
-      <br>
-      <div >
-        <p>Todos los campos son obligatorios</p>
-        <br>
-        <center><button mat-button matStepperNext style="color: white;padding: 15px 32px;background-color: #2a62cc;display: inline-block;margin:auto;font-size: 16px;" >Continuar</button></center>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
-    <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Credenciales</ng-template>
-      <mat-form-field appearance="fill">
-        <ion-item>
-          <ion-label position="floating">Correo electrónico</ion-label>
-          <ion-input placeholder="example@unijobs.cl" formControlName="secondCtrl"
-                 required></ion-input>
-          </ion-item>
-        <br><br>
-          <ion-item>
-            <ion-label position="floating">Nombre de usuario</ion-label>
             <ion-input  formControlName="secondCtrl"
                    required></ion-input>
           </ion-item>
         <br><br>
         <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password" placeholder="*******" formControlName="secondCtrl"
-                 required></ion-input>
-        </ion-item>
-        <br><br>
-        <ion-item>
-          <ion-label position="floating">Repetir contraseña</ion-label>
-          <ion-input type="password" placeholder="*******" formControlName="secondCtrl"
+          <ion-label position="floating">Fecha de nacimiento</ion-label>
+          <ion-input type="date" placeholder="01/01/1990" formControlName="secondCtrl"
                  required></ion-input>
         </ion-item>
       
@@ -74,12 +61,44 @@
     </form>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
+    <ng-template matStepLabel>Credenciales</ng-template>
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Credenciales</ng-template>
+      <mat-form-field appearance="fill">
+        <ion-item>
+          <ion-label position="floating">Correo electrónico</ion-label>
+          <ion-input placeholder="example@unijobs.cl" formControlName="thirdCtrl"
+                 required></ion-input>
+          </ion-item>
+        <br><br>
+          <ion-item>
+            <ion-label position="floating">Nombre de usuario</ion-label>
+            <ion-input  formControlName="thirdCtrl"
+                   required></ion-input>
+          </ion-item>
+        <br><br>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" placeholder="*******" formControlName="thirdCtrl"
+                 required></ion-input>
+        </ion-item>
+        <br><br>
+        <ion-item>
+          <ion-label position="floating">Repetir contraseña</ion-label>
+          <ion-input type="password" placeholder="*******" formControlName="thirdCtrl"
+                 required></ion-input>
+        </ion-item>
+      
+      </mat-form-field>
+      <br>
+      <div>
+        <p>Todos los campos son obligatorios</p>
+        <br>
+        <button mat-button matStepperPrevious  style="color: white;padding: 15px 32px;background-color: #2a62cc;display: inline-block;margin:auto;font-size: 16px;" >Volver</button>
+      <button style="color: white;padding: 15px 32px;background-color: #2a62cc;display: block;margin:auto;font-size: 16px;float: right;" [routerLink]="['/login']">Registrarse</button>
+      </div>
+    </form>
+ 
   </mat-step>
 </mat-stepper>
 </ion-content>
