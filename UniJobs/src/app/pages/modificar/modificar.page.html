@@ -25,22 +25,23 @@
           <ion-input type="text" [(ngModel)]="empleo.titulo_emp"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Texto</ion-label>
+          <ion-label position="floating">Descripción</ion-label>
           <ion-textarea type="text" [(ngModel)]="empleo.descrip_emp"></ion-textarea>
-        </ion-item>
-        <!--<ion-item>
-          <ion-label position="floating">Nombre Usuario</ion-label>
-          <ion-textarea type="text" [(ngModel)]="empleo.Nombre_usu"></ion-textarea>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Descripción del empleo</ion-label>
-          <ion-textarea type="text" [(ngModel)]="empleo.Descrip_emp"></ion-textarea>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Ganancia</ion-label>
-          <ion-input type="number" placeholder="" [(ngModel)]="empleo.Sueldo_emp">$ {{sueldo | currency:'CLP':'symbol-narrow':'.0-0'}}</ion-input>
+          <ion-input type="number" placeholder="" [(ngModel)]="empleo.pago_emp">$ {{sueldo | currency:'CLP':'symbol-narrow':'.0-0'}}</ion-input>
         </ion-item>
-        -->
+        
+        <ion-item *ngIf="ocultar1">
+          <ion-label position="floating">Nombre usuario</ion-label>
+          <ion-input type="text" [(ngModel)]="empleo.nombre_usu"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="ocultar1">
+          <ion-label position="floating">Run usuario</ion-label>
+          <ion-input type="text" [(ngModel)]="empleo.run_usu"></ion-input>
+        </ion-item>
+      
         <ion-button (click)="editaremp()">Guardar</ion-button>
       </ion-card-content>
       

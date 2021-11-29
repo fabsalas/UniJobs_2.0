@@ -46,6 +46,7 @@ export class LoginPage implements OnInit {
       state : {textoEnviado : this.iniciarsesion.Usuario}
     }
       this.router.navigate(['./home'], navigationExtras);
+      
     }
 
     }

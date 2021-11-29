@@ -41,6 +41,16 @@ export class HomePage  implements OnInit{
     }
   ]
 
+  postulacion: any =[
+    {
+      id_post:'',
+      id_emp: '',
+      titulo_emp: '',
+      pago_emp: '',
+      run_usu: ''
+    }
+  ]
+
   mapa: any ;
   
   @ViewChild('mapa', {read: ElementRef, static: false}) mapRef: ElementRef;
@@ -73,6 +83,16 @@ export class HomePage  implements OnInit{
       }
       //this.servicioBD.presentAlert("4");
     });
+    this.servicioBD.dbState().subscribe((res) =>{
+      // this.servicioBD.presentAlert("2");
+       if(res){
+        // this.servicioBD.presentAlert("3");
+         this.servicioBD.fetchPostulacion().subscribe(item =>{
+           this.postulacion = item; 
+         })
+       }
+       //this.servicioBD.presentAlert("4");
+     });
   }
 
   
@@ -109,12 +129,22 @@ export class HomePage  implements OnInit{
                cadenaTexto2: item.titulo_emp, 
                cadenaTexto3: item.descrip_emp,
                cadenaTexto4: item.pago_emp,
-               cadenaTexto5: item.status_emp,
-               cadenaTexto6: item.nombre_usu,
-               cadenaTexto7: item.run_usu
+               cadenaTexto5: item.nombre_usu,
+               cadenaTexto6: item.run_usu
             }
     }
     this.router.navigate(['/modificar'], navigationExtras);
+  }
+  postular(item) {
+    console.log(item);
+    let navigationExtras: NavigationExtras = {
+      state: { cadenaTexto: item.id_emp ,
+               cadenaTexto2: item.titulo_emp, 
+               cadenaTexto3: item.pago_emp,
+               cadenaTexto4: item.run_usu
+            }
+    }
+    this.router.navigate(['/postular'], navigationExtras);
   }
 
   //postular a empleo
