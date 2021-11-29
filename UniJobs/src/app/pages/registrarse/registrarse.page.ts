@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-
+import { AlertController, NavController } from '@ionic/angular';
 @Component({
   selector: 'app-registrarse',
   templateUrl: './registrarse.page.html',
@@ -18,12 +18,11 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 })
 export class RegistrarsePage implements OnInit {
  completar=false;
- stepOne:FormGroup;
  
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-
-  constructor(private _formBuilder: FormBuilder) {}
+  thirdFormGroup: FormGroup;
+  constructor(private _formBuilder: FormBuilder,public alertController: AlertController, public navCtrl: NavController) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -32,8 +31,25 @@ export class RegistrarsePage implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required],
     });
+    this.thirdFormGroup = this._formBuilder.group({
+      thirdCtrl: ['', Validators.required],
+    });
   }
-completeStep(){
-  this.completar=true;
-}
+  Mostrar() {
+    this.presentAlert("Código de verificación","Hemos enviado un sms con su código de verificación, por favor, ingréselo a continuación: ");
+    }
+    async presentAlert(titulo:string,message:string){
+      const alert = await this.alertController.create({
+        header: titulo,
+        message: message,
+        buttons: ['Aceptar'],
+        inputs: [
+          {
+            name: 'code',
+            placeholder: 'Ingrese su código de verificación'
+          },
+        ],
+      });
+      await alert.present();
+    }
 }
