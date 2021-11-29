@@ -44,10 +44,16 @@ export class PostularPage implements OnInit {
 
   ngOnInit() {
   }
+  permisos(){
+  this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.SMS).then(
+    result => console.log('Has permission?',result.hasPermission),
+    err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.SMS)
+  );
+  
+  this.androidPermissions.requestPermissions([this.androidPermissions.PERMISSION.SMS, this.androidPermissions.PERMISSION.GET_ACCOUNTS]);
+  }
 
- 
-
-
+  
   postularemp(){
    
   }
@@ -65,7 +71,7 @@ export class PostularPage implements OnInit {
  
 
 
- enviarsms(){
+/* enviarsms(){
     var options:{
       replaceLineBreaks: false,
       android: {
@@ -78,7 +84,7 @@ export class PostularPage implements OnInit {
     }).catch((err)=>{
       alert(JSON.stringify(err))
     });
-  }
+  }*/
 
 }
 
