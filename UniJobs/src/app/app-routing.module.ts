@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'inicio',
+    redirectTo: 'home',
     pathMatch: 'full'
   },
   {
@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'modificar',
     loadChildren: () => import('./pages/modificar/modificar.module').then( m => m.ModificarPageModule)
+  },
+  {
+    path: 'postular',
+    loadChildren: () => import('./pages/postular/postular.module').then( m => m.PostularPageModule)
   },
   {
     path: '**',

@@ -37,7 +37,7 @@
       <!--Cards de los empleos-->
      
       <ion-list *ngIf="ocultar1">
-          <mat-card class="example-card" *ngFor="let item of empleo" [routerLink]="['/home']">
+          <mat-card class="example-card" *ngFor="let item of empleo" >
             <mat-card-title-group>
               <mat-card-title>{{item.titulo_emp}}</mat-card-title>
               <mat-card-subtitle>{{item.nombre_usu}}</mat-card-subtitle>
@@ -47,11 +47,10 @@
               {{item.descrip_emp}}
             </mat-card-content>
             <mat-card-actions>
-              <button mat-icon-button color="primary" >
+              <ion-button mat-icon-button color="primary" [routerLink]="['/postular']">
                 Postular
-                  <mat-icon class="example-tab-icon" label>next_week</mat-icon>
-                
-              </button>
+                  <mat-icon class="example-tab-icon" label> next_week</mat-icon>
+              </ion-button>
 
             </mat-card-actions>
           </mat-card>
@@ -133,6 +132,8 @@
           
           <mat-card-actions >
             <ion-button  ion-left expand="block" color="danger" [routerLink]="['/inicio']">Cerrar sesión</ion-button>
+            <br/>
+            <!--<ion-button  ion-left expand="block" color="success" (Click)="permisos">Otorgar permisos</ion-button>-->
             <!--<button mat-raised-button style="display: inline-flexbox;float: left;">Postulaciones</button>
             <button mat-raised-button style="display: inline-flexbox;float: right;">Publicaciones</button>-->
           </mat-card-actions>
