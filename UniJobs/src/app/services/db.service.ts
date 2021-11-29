@@ -23,7 +23,7 @@ export class DbService {
   registro_emp: string = "INSERT or IGNORE INTO empleo(id_emp, titulo_emp, descrip_emp, pago_emp, status_emp,nombre_usu,run_usu) VALUES (1,'Paseo perruno','Necesito que alguien realice el paseo perruno', 2000, 'ayer','nico',204679525);";
   /*update_emp :string = "UPDATE empleo SET titulo = 'zapato', texto = '123124214'  WHERE id = 1";*/  
   TablaPostulacion: string = "CREATE TABLE IF NOT EXISTS postulacion(id_post INTEGER PRIMARY KEY AUTOINCREMENT,id_emp INTEGER NOT NULL, run_usu INTEGER NOT NULL,FOREIGN KEY (run_usu) REFERENCES usuario (run_usu), FOREIGN KEY (id_emp) REFERENCES empleo(id_emp));";
-  registro_post: string = "INSERT or IGNORE INTO empleo(id_post, id_emp,run_usu,fecha_post) VALUES (1,1,204679525);";
+  registro_post: string = "INSERT or IGNORE INTO postulacion(id_post, id_emp,run_usu) VALUES (1,1,204679525);";
   /*update_emp :string = "UPDATE empleo SET titulo = 'zapato', texto = '123124214'  WHERE id = 1";*/  
 
 

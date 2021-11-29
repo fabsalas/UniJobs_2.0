@@ -1,9 +1,47 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>registrarse</ion-title>
+    <ion-title>UniJobs</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+<mat-stepper #stepper [labelPosition]="'bottom'" >
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Es requerido">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Contacto</ng-template>
+      <mat-form-field appearance="legacy">
+        <mat-label>Name</mat-label>
+        <input placeholder="Last name, First name" formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <p>Go to a different step to see the error state</p>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Address is required.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Personales</ng-template>
+      <mat-form-field appearance="fill">
+        <ion-item>
+        <ion-label position="floating">Texto</ion-label>
+        <ion-input placeholder="Ex. 1 Main St, New York, NY" formControlName="secondCtrl"
+               required></ion-input>
+        </ion-item>
+      </mat-form-field>
+      <div>
+        <p>Go to a different step to see the error state</p>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
 </ion-content>
