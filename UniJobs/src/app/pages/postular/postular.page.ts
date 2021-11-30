@@ -27,19 +27,24 @@ export class PostularPage implements OnInit {
       nombre_usu:'',
       run_usu: ''  
     }
-  constructor(private router: Router, private activeroute: ActivatedRoute, private servicioBD: DbService, private sms: SMS , private callNumber: CallNumber, private toastCtrl: ToastController,
-    private androidPermissions: AndroidPermissions) { 
-    /*this.activeroute.queryParams.subscribe(params => {
-      if(this.router.getCurrentNavigation().extras.state){
-        this.empleo.id_emp      = this.router.getCurrentNavigation().extras.state.cadenaTexto;
-        this.empleo.titulo_emp  = this.router.getCurrentNavigation().extras.state.cadenaTexto2;
-        this.empleo.descrip_emp  = this.router.getCurrentNavigation().extras.state.cadenaTexto3;
-        this.empleo.pago_emp  = this.router.getCurrentNavigation().extras.state.cadenaTexto4;
-        this.empleo.status_emp  = this.router.getCurrentNavigation().extras.state.cadenaTexto5;
-        this.empleo.nombre_usu  = this.router.getCurrentNavigation().extras.state.cadenaTexto6;
-        this.empleo.run_usu  = this.router.getCurrentNavigation().extras.state.cadenaTexto7;
+  postulacion: any =[
+      {
+        id_post:'',
+        id_emp: '',
+        titulo_emp: '',
+        pago_emp: '',
+        run_usu: ''
       }
-    })*/
+    ]
+  constructor(private router: Router, private activeroute: ActivatedRoute, private servicioBD: DbService, private sms: SMS , private callNumber: CallNumber, private toastCtrl: ToastController,private androidPermissions: AndroidPermissions) { 
+    this.activeroute.queryParams.subscribe(params => {
+      if(this.router.getCurrentNavigation().extras.state){
+        this.postulacion.id_emp      = this.router.getCurrentNavigation().extras.state.cadenaTexto;
+        this.postulacion.titulo_emp  = this.router.getCurrentNavigation().extras.state.cadenaTexto2;
+        this.postulacion.pago_emp  = this.router.getCurrentNavigation().extras.state.cadenaTexto3;
+        this.postulacion.run_usu  = this.router.getCurrentNavigation().extras.state.cadenaTexto4;
+      }
+    })
   }
 
   ngOnInit() {
@@ -55,7 +60,10 @@ export class PostularPage implements OnInit {
 
   
   postularemp(){
-   
+    this.servicioBD.addPostulacion(this.postulacion.id_emp,this.postulacion.titulo_emp, this.postulacion.pago_emp,this.postulacion.run_usu);
+    this.servicioBD.presentAlert("Postulado");
+    /*console.log('lol');*/
+    this.router.navigate(['/home']);
   }
 
   llamar(){

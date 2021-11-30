@@ -20,7 +20,13 @@ import { DbService } from 'src/app/services/db.service';
   ]
 })
 export class RegistrarsePage implements OnInit {
- completar=false;
+  public ocultar1: boolean = false;
+  public ocultar2: boolean = true;
+ 
+  accion1(){
+  this.ocultar1 = !this.ocultar1;
+  this.ocultar2 = !this.ocultar2;
+  }
  
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;

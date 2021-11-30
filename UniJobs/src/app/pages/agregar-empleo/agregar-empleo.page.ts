@@ -26,16 +26,20 @@ export class AgregarEmpleoPage implements OnInit {
       titulo_emp: '',
       descrip_emp: '',
       pago_emp: '',
-      status_emp: '' 
+      nombre_usu: '',
+      run_usu: ''
     }
   ]
+  //sesion: any = {
+   // nombre_usu : ''
+ // };
   constructor(private router: Router, private servicioBD: DbService) { }
 
   ngOnInit() {
   }
 
   agregaremp(){
-    this.servicioBD.addEmpleo(this.empleo.titulo_emp, this.empleo.descrip_emp, this.empleo.pago_emp,this. empleo.status_emp);
+    this.servicioBD.addEmpleo(this.empleo.titulo_emp, this.empleo.descrip_emp, this.empleo.pago_emp,this.empleo.nombre_usu,this.empleo.run_usu);
     this.servicioBD.presentAlert("Registro realizado");
     /*console.log('lol');*/
     this.router.navigate(['/home']);

@@ -46,6 +46,7 @@ export class LoginPage implements OnInit {
       state : {textoEnviado : this.item.nombre_usu}
     }
       this.router.navigate(['./home'], navigationExtras);
+      
     }
 
     }
