@@ -4,7 +4,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { DbService } from 'src/app/services/db.service';
-
+import {MatStepperModule} from '@angular/material/stepper';
 @Component({
   selector: 'app-registrarse',
   templateUrl: './registrarse.page.html',
@@ -23,18 +23,13 @@ export class RegistrarsePage implements OnInit {
   public ocultar1: boolean = false;
   public ocultar2: boolean = true;
  
-  accion1(){
-  this.ocultar1 = !this.ocultar1;
-  this.ocultar2 = !this.ocultar2;
-  }
- 
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
 
 
-  public ocultar1: boolean = false;
-  public ocultar2: boolean = true;
+
  
   usuario: any =[
     {
@@ -51,7 +46,7 @@ export class RegistrarsePage implements OnInit {
   ]
 
  
-  constructor(private _formBuilder: FormBuilder,public alertController: AlertController, public navCtrl: NavController, private router: Router, private servicioBD: DbService, public toastController: ToastController) {}
+  constructor(private _formBuilder: FormBuilder,public alertController: AlertController, public navCtrl: NavController, private router: Router, private servicioBD: DbService, public toastController: ToastController ) {}
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
