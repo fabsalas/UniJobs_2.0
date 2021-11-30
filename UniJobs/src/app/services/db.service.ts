@@ -18,7 +18,7 @@ export class DbService {
   TablaUsuarios: string = "CREATE TABLE IF NOT EXISTS usuario(run_usu INTEGER PRIMARY KEY, numero_usu INTEGER NOT NULL, nombre VARCHAR(50) NOT NULL, apellido VARCHAR(50) NOT NULL, fec_nac DATE NOT NULL, correo VARCHAR(50) NOT NULL, nombre_usu VARCHAR(50)NOT NULL, clave VARCHAR(50)NOT NULL);";
   registro_usu: string = "INSERT or IGNORE INTO usuario(run_usu, numero_usu, nombre, apellido, fec_nac, correo, nombre_usu, clave) VALUES (204679525, 12345678,'Nicolas', 'sanchez', 09/10/1998, 'nnm@jkl.com', 'nico', '123qwe');";
   /*tabla empleos */
-  dropemp:string = "DROP TABLE empleo;"
+  dropemp:string = "DROP TABLE postulacion;"
   TablaEmpleos: string = "CREATE TABLE IF NOT EXISTS empleo(id_emp INTEGER PRIMARY KEY AUTOINCREMENT, titulo_emp VARCHAR(50) NOT NULL, descrip_emp VARCHAR(50) NOT NULL, pago_emp NUMBER(4) NOT NULL, nombre_usu VARCHAR(50) NOT NULL,run_usu INTEGER NOT NULL,FOREIGN KEY (run_usu) REFERENCES usuario (run_usu));";
   registro_emp: string = "INSERT or IGNORE INTO empleo(id_emp, titulo_emp, descrip_emp, pago_emp,nombre_usu,run_usu) VALUES (1,'Paseo perruno','Necesito que alguien realice el paseo perruno', 2000, 'nico',204679525);";
   /*update_emp :string = "UPDATE empleo SET titulo = 'zapato', texto = '123124214'  WHERE id = 1";*/  
@@ -234,8 +234,9 @@ deleteUsuario(run_usu) {
 
 // Funciones postulacion
 
+
 buscarPostulacion() {
-  return this.database.executeSql('SELECT * FROM postulacion WHERE run_usu=204679525', []).then(res => {
+  return this.database.executeSql('SELECT * FROM postulacion ', []).then(res => {
     let items: Postulacion[] = [];
     //this.presentAlert("b");
     if (res.rows.length > 0) {
@@ -269,7 +270,7 @@ addPostulacion(id_emp, run_usu,titulo_emp,pago_emp) {
   return this.database.executeSql('INSERT INTO postulacion (id_emp, titulo_emp,pago_emp, run_usu) VALUES (?, ?,?,?)', data)
     .then(_res => {
       this.buscarPostulacion();
-    })
+    }).catch(error => this.presentAlert(error.message));
 }
 
 

@@ -43,7 +43,7 @@ export class HomePage  implements OnInit{
 
   postulacion: any =[
     {
-      id_post:'',
+      Id_post:'',
       id_emp: '',
       titulo_emp: '',
       pago_emp: '',
@@ -76,23 +76,18 @@ export class HomePage  implements OnInit{
     this.servicioBD.dbState().subscribe((res) =>{
      // this.servicioBD.presentAlert("2");
       if(res){
-       // this.servicioBD.presentAlert("3");
+       // 
         this.servicioBD.fetchEmpleos().subscribe(item =>{
           this.empleo = item; 
         })
+        
+        this.servicioBD.fetchPostulacion().subscribe(item =>{
+          this.servicioBD.presentAlert("3");
+          this.postulacion = item; 
+        })
       }
-      //this.servicioBD.presentAlert("4");
+      this.servicioBD.presentAlert("4");
     });
-    this.servicioBD.dbState().subscribe((res) =>{
-      // this.servicioBD.presentAlert("2");
-       if(res){
-        // this.servicioBD.presentAlert("3");
-         this.servicioBD.fetchPostulacion().subscribe(item =>{
-           this.postulacion = item; 
-         })
-       }
-       //this.servicioBD.presentAlert("4");
-     });
   }
 
   
