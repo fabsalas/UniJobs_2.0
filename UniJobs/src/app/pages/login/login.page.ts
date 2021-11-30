@@ -14,7 +14,7 @@ export class LoginPage implements OnInit {
   usuario : string;
   contra : number;*/
 
-  iniciarsesion: any = {
+  usuario: any = {
     nombre_usu : '',
     clave : ''
   };
@@ -24,11 +24,11 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  /*ingresar(){
-    if (this.usuario == this.usu && this.contra == this.clave){
+  ingresar(){
+    if (this.usuario.nombre_usu == this.usuario.nombre_usu && this.usuario.clave == this.usuario.clave){
       this.router.navigate(['/home']);
     }
-    else if(this.usuario == null || this.contra ==null){
+    else if(this.usuario.nombre_usu == null || this.usuario.clave ==null){
       this.presentToast("Usuario o contraseña en blanco")
     }
     else{
@@ -36,14 +36,14 @@ export class LoginPage implements OnInit {
     }
       
     
-  }*/
+  }
 
-  async ingresar(item){
+  /*async ingresar(item){
     if(this.validateModel(this.ingresar)){
-      await this.servicioBD.ingresar(this.iniciarsesion.nombre_usu, this.iniciarsesion.clave);
+      await this.servicioBD.ingresar(this.item.nombre_usu, this.item.clave);
      //this.servicioBD.presentAlert(this.servicioBD.existe+"");
      if(this.servicioBD.usu_creado == 1){ let navigationExtras: NavigationExtras ={
-      state : {textoEnviado : this.iniciarsesion.Usuario}
+      state : {textoEnviado : this.item.nombre_usu}
     }
       this.router.navigate(['./home'], navigationExtras);
     }
@@ -64,7 +64,7 @@ export class LoginPage implements OnInit {
       }
     }
     return true;
-  }
+  }*/
  
   
   async presentToast(message: string, duration?: number){

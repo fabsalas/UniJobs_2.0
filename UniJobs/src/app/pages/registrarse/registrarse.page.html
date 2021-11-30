@@ -11,7 +11,7 @@
       <mat-form-field appearance="legacy">
         <ion-item>
           <ion-label position="floating">Número telefónico</ion-label>
-          <ion-input placeholder=" 9 12345678" formControlName="firstCtrl"
+          <ion-input [(ngModel)]="usuario.numero_usu" placeholder=" 9 12345678" formControlName="firstCtrl"
                  required>+56 </ion-input>
           </ion-item>
       </mat-form-field>
@@ -23,7 +23,8 @@
         <center><ion-button color="light"  (click)="Mostrar()">ENVIAR SMS</ion-button></center>
       </div>
       <div >
-        <center><button mat-button matStepperNext style="color: white;padding: 15px 32px;background-color: #2a62cc;display: inline-block;margin:auto;font-size: 16px;" >Continuar</button></center>
+        <center><ion-button mat-button (click)="accion1()" expand="block" color="primary" (click)="Guardar()">Guardar</ion-button></center>
+        <center><button mat-button  matStepperNext *ngIf="ocultar1" style="color: white; padding: 15px 32px;background-color: #000505;display: inline-block;margin:auto;font-size: 16px; font-weight: 150%; border-radius: 5%;" >Continuar</button></center>
       </div>
     </div>
     </form>
@@ -34,19 +35,25 @@
       <mat-form-field appearance="legacy">
         <ion-item>
           <ion-label position="floating">R.U.T</ion-label>
-          <ion-input placeholder="123456789" formControlName="secondCtrl"
+          <ion-input [(ngModel)]="usuario.run_usu" placeholder="123456789" formControlName="secondCtrl"
                  required></ion-input>
           </ion-item>
         <br><br>
           <ion-item>
-            <ion-label position="floating">Nombre completo</ion-label>
-            <ion-input  formControlName="secondCtrl"
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="usuario.nombre" formControlName="secondCtrl"
                    required></ion-input>
           </ion-item>
         <br><br>
         <ion-item>
+          <ion-label position="floating">Apellido</ion-label>
+          <ion-input [(ngModel)]="usuario.apellido" formControlName="secondCtrl"
+                 required></ion-input>
+        </ion-item>
+        <br><br>
+        <ion-item>
           <ion-label position="floating">Fecha de nacimiento</ion-label>
-          <ion-input type="date" placeholder="01/01/1990" formControlName="secondCtrl"
+          <ion-input type="date" [(ngModel)]="usuario.fec_nac" placeholder="01/01/1990" min="1960" max="2002" formControlName="secondCtrl"
                  required></ion-input>
         </ion-item>
       
@@ -55,8 +62,9 @@
       <div>
         <p>Todos los campos son obligatorios</p>
         <br>
-        <button mat-button matStepperPrevious style="color: white;padding: 15px 32px;background-color: #2a62cc;display: inline-block;margin:auto;font-size: 16px;">Volver</button>
-        <button mat-button matStepperNext style="color: white;padding: 15px 32px;background-color: #2a62cc;display: block;margin:auto;font-size: 16px;float: right;">Continuar</button>
+        <center><button mat-button matStepperPrevious style="color: white;padding: 15px 32px;background-color: #000000;display: inline-block;margin:auto;font-size: 16px;border-radius: 5%;">Volver</button></center>
+        <ion-button mat-button  (click)="accion1()" expand="block" color="primary" (click)="Guardar2()">Guardar</ion-button>
+        <center><button mat-button matStepperNext  *ngIf="ocultar1"  style="color: white;padding: 15px 32px;background-color: #000000;display: inline-block;margin:auto;font-size: 16px; border-radius: 5%;">Continuar</button></center>
       </div>
     </form>
   </mat-step>
@@ -67,13 +75,13 @@
       <mat-form-field appearance="fill">
         <ion-item>
           <ion-label position="floating">Correo electrónico</ion-label>
-          <ion-input placeholder="example@unijobs.cl" formControlName="thirdCtrl"
+          <ion-input placeholder="example@unijobs.cl" [(ngModel)]="usuario.correo" formControlName="thirdCtrl"
                  required></ion-input>
           </ion-item>
         <br><br>
           <ion-item>
             <ion-label position="floating">Nombre de usuario</ion-label>
-            <ion-input  formControlName="thirdCtrl"
+            <ion-input  [(ngModel)]="usuario.nombre_usu" formControlName="thirdCtrl"
                    required></ion-input>
           </ion-item>
         <br><br>
@@ -85,7 +93,7 @@
         <br><br>
         <ion-item>
           <ion-label position="floating">Repetir contraseña</ion-label>
-          <ion-input type="password" placeholder="*******" formControlName="thirdCtrl"
+          <ion-input type="password" placeholder="*******" [(ngModel)]="usuario.clave" formControlName="thirdCtrl"
                  required></ion-input>
         </ion-item>
       
@@ -94,8 +102,9 @@
       <div>
         <p>Todos los campos son obligatorios</p>
         <br>
-        <button mat-button matStepperPrevious  style="color: white;padding: 15px 32px;background-color: #2a62cc;display: inline-block;margin:auto;font-size: 16px;" >Volver</button>
-      <button style="color: white;padding: 15px 32px;background-color: #2a62cc;display: block;margin:auto;font-size: 16px;float: right;" [routerLink]="['/login']">Registrarse</button>
+        <center><button mat-button matStepperPrevious  style="color: white;padding: 15px 32px;background-color: #2a62cc;display: inline-block;margin:auto;font-size: 16px;border-radius: 5%;" >Volver</button></center>
+      <ion-button expand="block" color="light" [routerLink]="['/login']"(click)="Guardar3()">Registrarse</ion-button>
+      
       </div>
     </form>
  
