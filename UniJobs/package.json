@@ -96,8 +96,7 @@
       "cordova-plugin-geolocation": {},
       "cordova-sms-plugin": {},
       "mx.ferreyra.callnumber": {},
-      "cordova-plugin-android-permissions": {},
-      "call-number": {}
+      "cordova-plugin-android-permissions": {}
     },
     "platforms": [
       "android"

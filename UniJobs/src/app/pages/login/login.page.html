@@ -18,12 +18,12 @@
           <h2 style="text-align:center;">Iniciar Sesión</h2>
         <ion-item>
               <ion-label position="floating">Usuario</ion-label>
-              <ion-input type="text" [(ngModel)]="iniciarsesion.nombre_usu" placeholder="Usuario"></ion-input>
+              <ion-input type="text" [(ngModel)]="usuario.nombre_usu" placeholder="Usuario"></ion-input>
         </ion-item>
         <br />
         <ion-item>
               <ion-label position="floating">Contraseña</ion-label>
-              <ion-input type="password"  [(ngModel)]="iniciarsesion.clave" placeholder="Contraseña"></ion-input>
+              <ion-input type="password"  [(ngModel)]="usuario.clave" placeholder="Contraseña"></ion-input>
         </ion-item>
         <br/>
         <ion-button expand="block" color="dark" (click)="ingresar()">Ingresar</ion-button>

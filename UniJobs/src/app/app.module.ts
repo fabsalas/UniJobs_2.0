@@ -18,12 +18,14 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, BrowserAnimationsModule],
-  providers: [{ provide:  RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, Geolocation, SMS, CallNumber, AndroidPermissions],
+  providers: [{ provide:  RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, Geolocation, SMS, CallNumber, AndroidPermissions,MatStepperModule,MatSliderModule],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

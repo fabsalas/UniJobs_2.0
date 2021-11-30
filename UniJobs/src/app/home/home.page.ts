@@ -3,7 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { DbService } from '../services/db.service';
 
 //import de api geolocation
- import{ Geolocation } from '@ionic-native/geolocation/ngx';
+import{ Geolocation } from '@ionic-native/geolocation/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 //google maps

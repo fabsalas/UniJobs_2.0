@@ -146,6 +146,7 @@ export class DbService {
       });
   }
 
+
   //Funciones usuarios
 
 buscarUsuarios() {
@@ -229,6 +230,7 @@ deleteUsuario(run_usu) {
       this.buscarUsuarios();
     });
 }
+
 
 // Funciones postulacion
 
